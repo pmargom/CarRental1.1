@@ -18,9 +18,6 @@ Please make sure that you have the following installed:
 
 * [DotNet Core], you _may_ need it if you haven't already got it installed:
 
-```bash
-npm install -g node-sass
-```
 ## Project Install:
 
 #### Step 1: Project modules
