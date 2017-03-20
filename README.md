@@ -21,10 +21,8 @@ Please make sure that you have the following installed:
 ## Project Install:
 
 #### Step 1: Project modules
-To run the aplication, folow the steps below:
-```bash
-npm install
-```
+Download the code.
+
 #### Step 2: Update dotnet packages
 To run the aplication, folow the steps below:
 ```bash
