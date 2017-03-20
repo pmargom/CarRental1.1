@@ -20,8 +20,8 @@ Please make sure that you have the following installed:
 
 ## Project Install:
 
-#### Step 1: Project modules
-Download the code.
+#### Step 1: Project download
+Just download the code.
 
 #### Step 2: Update dotnet packages
 To run the aplication, folow the steps below:
