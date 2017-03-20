@@ -254,3 +254,4 @@ paket-files/
 ######## (Added by PMG) ########
 # Visual Studio Code 
 .vscode/
+dist/

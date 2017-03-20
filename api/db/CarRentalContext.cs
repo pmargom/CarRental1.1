@@ -8,7 +8,7 @@ namespace CarRental.api.db {
         
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder) {
-            builder.UseSqlServer(@"Data Source=x.x.x.x;Initial Catalog=dbname;User ID=dbuser;Password=dbpassword");
+            builder.UseSqlServer(@"Data Source=localhost\sqlexpress;Initial Catalog=carrental;User ID=carrentaluser;Password=123456");
         }
     }
 

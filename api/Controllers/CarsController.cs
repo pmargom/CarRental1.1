@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CarRental.api.db;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.api.Controllers
@@ -9,7 +11,64 @@ namespace CarRental.api.Controllers
     [Route("api/v1/[controller]")]
     public class CarsController: Controller {
         
-        private static List<Car> _cars;
+        private static CarRentalContext _context;
+
+        static CarsController()
+        {
+            _context = new CarRentalContext();
+            //_cars = MockData;
+            //_cars = MockData;
+        }
+
+        [HttpGet]
+        public IEnumerable<Car> GetAll()
+        {
+            var cars = _context.Cars;
+            if (cars == null || cars.Count() == 0) {
+                return null;
+            }
+            return cars;
+        }
+
+        [HttpGet("{id}", Name = "GetCar")]
+        public IActionResult GetById(string id) {
+
+            //_cars = MockData;
+            var car = _context.Cars.ToList().Where(c => c.id == id);
+
+            if (car == null) {
+                return NotFound();
+            }
+
+            return new ObjectResult(car);
+        }
+
+        // POST cars
+        [HttpPost]
+        public IActionResult Post([FromBody]Car car)
+        {
+            _context.Cars.Add(car);
+            _context.SaveChanges();
+            var newCar = _context.Cars.ToList().Where(c => car.CarNumber == car.CarNumber );
+            if (newCar == null) {
+                return NotFound();
+            }
+            return Ok(newCar);
+        }
+
+        // PUT cars/2
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody]Car car)
+        {
+            // TODO: Update car details into database
+            return Ok();
+        }
+
+        // DELETE cars/2
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
 
         private static List<Car> MockData
         {
@@ -54,54 +113,6 @@ namespace CarRental.api.Controllers
                     },
                 };
             }
-        }
-        static CarsController()
-        {
-            _cars = MockData;
-        }
-
-        [HttpGet]
-        public IEnumerable<Car> GetAll()
-        {
-            return _cars.AsReadOnly();
-        }
-
-        [HttpGet("{id}", Name = "GetCar")]
-        public IActionResult GetById(string id) {
-
-            _cars = MockData;
-            var car = _cars.Find(c => c.id == id);
-
-            if (car == null) {
-                return NotFound();
-            }
-
-            return new ObjectResult(car);
-        }
-
-
-        // POST cars
-        [HttpPost]
-        public IActionResult Post([FromBody]Car car)
-        {
-            var _newCar = new Car();
-            // TODO: Add new car to database
-            
-            return Ok(_newCar);
-        }
-
-        // PUT cars/2
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Car car)
-        {
-            // TODO: Update car details into database
-            return Ok();
-        }
-
-        // DELETE cars/2
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 

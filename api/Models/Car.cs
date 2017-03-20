@@ -11,6 +11,8 @@ public enum CarEngine {
 }
 
 public class Car {
+
+    public Car() {}
     public string id { get; set; }
     public string CarNumber { get; set; }       // matrícula de coche
     public CarType Type { get; set; }           // tipo de coche
