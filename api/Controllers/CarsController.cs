@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.api.Controllers
@@ -76,7 +78,31 @@ namespace CarRental.api.Controllers
 
             return new ObjectResult(car);
         }
-        
+
+
+        // POST cars
+        [HttpPost]
+        public IActionResult Post([FromBody]Car car)
+        {
+            var _newCar = new Car();
+            // TODO: Add new car to database
+            
+            return Ok(_newCar);
+        }
+
+        // PUT cars/2
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody]Car car)
+        {
+            // TODO: Update car details into database
+            return Ok();
+        }
+
+        // DELETE cars/2
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
 
 }
